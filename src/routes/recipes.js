@@ -7,6 +7,7 @@ import { verifyToken } from "./users.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     try {
         const response = await RecipeModel.find({});
         res.json(response);
