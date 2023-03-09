@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use("/", express.static("dist"))
+app.use("/", express.static("/build"))
 
 app.use("/auth", userRouter);
 app.use("/recipes", recipesRouter);
