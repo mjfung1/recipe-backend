@@ -17,9 +17,12 @@ router.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new UserModel({username, password: hashedPassword});
-    await newUser.save();
+    const savedUser = await newUser.save();
 
-    res.json({msg: "User Registerd Successfully"});
+    const token = jwt.sign({ id: savedUser._id }, "secret");
+    res.json({ token, userID: savedUser._id });
+
+  
 });
 
 router.post("/login", async (req, res) => {
